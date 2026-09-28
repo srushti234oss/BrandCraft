@@ -2,3 +2,7 @@ Django>=4.2,<5.3
 djangorestframework>=3.14,<3.18
 python-dotenv>=1.0
 google-genai>=1.0
+dj-database-url>=2.3,<3
+gunicorn>=23,<24
+psycopg2-binary>=2.9,<3
+whitenoise>=6.8,<7

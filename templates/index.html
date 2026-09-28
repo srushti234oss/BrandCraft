@@ -1,0 +1,149 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a clear, practical brand strategy from a guided founder interview.">
+  <title>Brandcraft | AI Brand Strategy</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link rel="stylesheet" href="{% static 'css/brand-dashboard.css' %}">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <header class="site-header">
+    <a class="wordmark" href="#" data-action="home">brandcraft<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#how-it-works" data-public-only>How it works</a>
+      <a href="#features" data-public-only>What you get</a>
+      <button class="text-button" data-action="show-login" data-public-only>Log in</button>
+      <button class="button button-small" data-action="show-register" data-public-only>Start a brand</button>
+      <span id="user-label" class="user-label" hidden></span>
+      <button class="text-button" data-action="show-dashboard" data-auth-only hidden>Dashboard</button>
+      <button class="text-button" data-action="logout" data-auth-only hidden>Log out</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="landing-view" class="view">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AI BRAND IDENTITY AND STRATEGY</p>
+          <h1>Turn founder insight into a brand people remember.</h1>
+          <p class="hero-text">A guided interview turns the decisions in your head into positioning, voice, taglines, and a practical launch plan.</p>
+          <div class="hero-actions">
+            <button class="button" data-action="show-register">Build your strategy <span aria-hidden="true">-></span></button>
+            <a class="button button-quiet" href="#how-it-works">See the process</a>
+          </div>
+          <p class="hero-note">Demo mode is active. Your first strategy uses realistic mock AI output with no external API calls.</p>
+        </div>
+        <div class="strategy-preview" aria-label="Example brand strategy preview">
+          <div class="preview-topline"><span>STRATEGY SNAPSHOT</span><span class="status-dot">DEMO</span></div>
+          <h2>Kindred Glow</h2>
+          <div class="preview-rule"></div>
+          <p class="preview-label">POSITIONING</p>
+          <p>Thoughtful refillable skincare for people who want a calmer routine and less waste.</p>
+          <div class="preview-grid">
+            <div><p class="preview-label">PERSONALITY</p><strong>Clear. Warm. Capable.</strong></div>
+            <div><p class="preview-label">VOICE</p><strong>Useful, never pushy.</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="process-band">
+        <div class="section-intro"><p class="eyebrow">THE PROCESS</p><h2>From a blank page to a focused direction.</h2></div>
+        <ol class="process-list">
+          <li><span>01</span><h3>Set the context</h3><p>Name your brand, industry, and the idea you are bringing to life.</p></li>
+          <li><span>02</span><h3>Answer six questions</h3><p>Work through the choices that shape a meaningful identity.</p></li>
+          <li><span>03</span><h3>Use your strategy</h3><p>Keep positioning, tone, taglines, visuals, and launch actions in one report.</p></li>
+        </ol>
+      </section>
+
+      <section id="features" class="feature-band">
+        <div class="section-intro"><p class="eyebrow">BUILT FOR FOUNDER CLARITY</p><h2>Useful decisions, not generic buzzwords.</h2></div>
+        <div class="feature-grid">
+          <article><h3>Audience focus</h3><p>Translate a broad idea into a clear first audience and the problem worth solving.</p></article>
+          <article><h3>Distinct positioning</h3><p>Define what you stand for, where you are different, and how to say it simply.</p></article>
+          <article><h3>Launch-ready guidance</h3><p>Leave with a voice, taglines, visual direction, and practical marketing recommendations.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section id="auth-view" class="view narrow-view" hidden>
+      <div class="auth-panel">
+        <p id="auth-eyebrow" class="eyebrow">WELCOME</p>
+        <h1 id="auth-title">Start your brand strategy</h1>
+        <p id="auth-description">Create an account to save brands and strategy reports.</p>
+        <form id="auth-form" novalidate>
+          <label>Username<input id="auth-username" name="username" autocomplete="username" maxlength="150" required></label>
+          <label>Password<input id="auth-password" name="password" type="password" autocomplete="current-password" required></label>
+          <p id="password-help" class="field-help">Use at least 8 characters. A mix of words, numbers, and symbols is best.</p>
+          <p id="auth-error" class="form-error" role="alert"></p>
+          <button id="auth-submit" class="button button-block" type="submit">Create account</button>
+        </form>
+        <p class="auth-switch"><span id="auth-switch-copy">Already have an account?</span> <button class="inline-button" id="auth-switch" type="button">Log in</button></p>
+      </div>
+    </section>
+
+    <section id="dashboard-view" class="view app-view" hidden>
+      <div class="app-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Brands in progress</h1><p>Start a new direction or pick up a saved strategy.</p></div><button class="button" data-action="show-brand-form">New brand <span aria-hidden="true">+</span></button></div>
+      <div id="brand-form-panel" class="brand-form-panel" hidden>
+        <form id="brand-form" novalidate>
+          <div class="form-heading"><h2>Create a brand</h2><button class="icon-button" type="button" data-action="hide-brand-form" aria-label="Close brand form">x</button></div>
+          <div class="form-row"><label>Brand name<input name="name" maxlength="200" required placeholder="e.g. Kindred Glow"></label><label>Industry<input name="industry" maxlength="100" required placeholder="e.g. Skincare"></label></div>
+          <label>What are you building?<textarea name="description" maxlength="5000" rows="4" placeholder="Describe the business, product, or idea in a few sentences."></textarea></label>
+          <p id="brand-error" class="form-error" role="alert"></p>
+          <button class="button" type="submit">Create and begin interview</button>
+        </form>
+      </div>
+      <div id="brand-list" class="brand-list" aria-live="polite"></div>
+      <div id="empty-brands" class="empty-state" hidden><h2>Your first brand starts here.</h2><p>Create a brand, answer a short founder interview, and get a saved strategy to build from.</p><button class="button" data-action="show-brand-form">Create a brand</button></div>
+    </section>
+
+    <section id="interview-view" class="view app-view" hidden>
+      <div class="back-row"><button class="text-button" data-action="show-dashboard"><span aria-hidden="true"><-</span> All brands</button></div>
+      <div class="interview-layout">
+        <aside class="interview-aside"><p class="eyebrow">FOUNDER INTERVIEW</p><h1 id="interview-brand-name"></h1><p>Six focused questions. Your answers shape the strategy, so plain language is perfect.</p><div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div><p id="progress-copy" class="progress-copy"></p><span id="mode-badge" class="mode-badge">DEMO MODE</span></aside>
+        <section class="question-panel"><p id="question-number" class="question-number"></p><h2 id="interview-question">Preparing your first question...</h2><form id="answer-form" novalidate><label class="sr-only" for="interview-answer">Your answer</label><textarea id="interview-answer" rows="6" maxlength="2000" placeholder="Write what you know. You can keep it simple."></textarea><p id="interview-error" class="form-error" role="alert"></p><div class="answer-actions"><button class="button" type="submit">Continue <span aria-hidden="true">-></span></button></div></form><div class="answer-actions"><button id="generate-report-button" class="button button-quiet" type="button" hidden>Generate strategy</button></div></section>
+      </div>
+    </section>
+
+    <section id="report-view" class="view app-view" hidden>
+      <div class="brand-dashboard-shell">
+        <aside class="brand-sidebar">
+          <a class="brand-sidebar-mark" href="#" data-action="show-dashboard"><span class="brand-mark-icon">B</span><span><strong>brandcraft</strong><small>AI Branding Advisor</small></span></a>
+          <nav class="brand-steps" aria-label="Brand strategy progress">
+            <button class="brand-step" data-action="edit-brand"><b>1</b><span><strong>Idea</strong><small>Your input</small></span></button>
+            <button class="brand-step" data-action="restart-interview"><b>2</b><span><strong>Interview</strong><small>AI questions</small></span></button>
+            <button class="brand-step" data-action="dashboard-section" data-target="brand-battle"><b>3</b><span><strong>Directions</strong><small>Brand concepts</small></span></button>
+            <button class="brand-step" data-action="dashboard-section" data-target="visual-direction"><b>4</b><span><strong>Visualize</strong><small>Design direction</small></span></button>
+            <button class="brand-step" data-action="dashboard-section" data-target="audience-shifter"><b>5</b><span><strong>Challenge</strong><small>Audience tests</small></span></button>
+            <button class="brand-step current" aria-current="step" data-action="dashboard-section" data-target="brand-overview"><b>6</b><span><strong>Dashboard</strong><small>Your brand kit</small></span></button>
+            <button class="brand-step" data-action="dashboard-section" data-target="consistency-guardian"><b>7</b><span><strong>Consistency</strong><small>Check your content</small></span></button>
+            <button class="brand-step" data-action="dashboard-section" data-target="launch-kit"><b>8</b><span><strong>Export</strong><small>Launch materials</small></span></button>
+          </nav>
+          <p class="brand-sidebar-note">Turn ideas<br>into brands<br>that matter.</p>
+        </aside>
+        <main class="brand-dashboard-main">
+          <div class="dashboard-title-row"><div><p class="dashboard-eyebrow" id="report-mode"></p><h1>Your Brand Dashboard</h1><p>A complete brand identity crafted from your founder interview.</p></div><div class="dashboard-actions"><button class="dashboard-button" data-action="edit-brand"><span aria-hidden="true">&#9998;</span> Edit Brand</button><button class="dashboard-button primary" data-action="export-brand"><span aria-hidden="true">&#8681;</span> Download Brand Kit</button><button class="dashboard-icon-button" data-action="brand-notice" aria-label="Notifications" title="Notifications">&#128276;</button><button class="dashboard-avatar" id="dashboard-avatar" data-action="logout" aria-label="Log out" title="Log out">B</button></div></div>
+          <div class="brand-dashboard-grid" id="report-content" aria-live="polite"></div>
+        </main>
+      </div>
+      <dialog class="brand-edit-dialog" id="brand-edit-dialog">
+        <form id="brand-edit-form" method="dialog">
+          <div class="edit-dialog-title"><div><p class="dashboard-eyebrow">BRAND DETAILS</p><h2>Edit Brand</h2></div><button class="dashboard-icon-button" type="button" data-action="close-edit" aria-label="Close">&times;</button></div>
+          <label>Brand name<input name="name" maxlength="200" required></label>
+          <label>Industry<input name="industry" maxlength="100" required></label>
+          <label>Brand description<textarea name="description" maxlength="5000" rows="4"></textarea></label>
+          <p class="form-error" id="brand-edit-error" role="alert"></p>
+          <div class="edit-dialog-actions"><button class="dashboard-button" type="button" data-action="close-edit">Cancel</button><button class="dashboard-button primary" type="submit">Save changes</button></div>
+        </form>
+      </dialog>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>Brandcraft</span><span>Founder strategy, made practical.</span></footer>
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
